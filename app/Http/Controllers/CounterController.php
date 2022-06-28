@@ -34,7 +34,7 @@ class CounterController extends Controller
             }
             $res = [
                 "code" => 0,
-                "data" =>  $count
+                "data" =>  $count+1000
             ];
             Log::info('getCount rsp: '.json_encode($res));
             return response()->json($res);
