@@ -25,7 +25,17 @@ class CounterController extends Controller
      */
     public function getCount()
     { 
-        print_r(request()->header());
+
+        $openUrl    = "https://api.weixin.qq.com/sns/userinfo?access_token=".request()->header('x-wx-cloudbase-access-token')."&openid=".request()->header('x-wx-openid');
+        print_r($openUrl);
+        $ch2 = curl_init();
+        curl_setopt($ch2, CURLOPT_URL,$openUrl);
+        curl_setopt($ch2, CURLOPT_RETURNTRANSFER, 1);
+        $userInfo = curl_exec($ch2);
+        $user     = json_decode($userInfo,true);
+        print_r($user);die();
+       
+
         try {
             $data = (new Counters)->find(1);
             if ($data == null) {
