@@ -24,7 +24,8 @@ class CounterController extends Controller
      * @return Json
      */
     public function getCount()
-    {
+    { 
+        print_r($request->header());
         try {
             $data = (new Counters)->find(1);
             if ($data == null) {
