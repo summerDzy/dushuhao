@@ -16,6 +16,7 @@ use Exception;
 use App\Counters;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Log;
+use App\Services\User\UserInfoService;
 
 class CounterController extends Controller
 {
@@ -25,6 +26,11 @@ class CounterController extends Controller
      */
     public function getCount()
     {  
+        $this->UserInfoService = new UserInfoService();
+
+        $userInfo = $this->UserInfoService->getUserInfoById(1);
+        print_r($userInfo);die();
+
         try {
             $data = (new Counters)->find(1);
             if ($data == null) {
