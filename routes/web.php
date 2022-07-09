@@ -23,4 +23,6 @@ Route::group(['prefix' => 'api'], function ($router) {
 	Route::get('/user/info', 'UserController@getUserInfo');
 
 	Route::get('/book/list', 'BookController@getBookList');
+
+	Route::get('/book/info', 'BookController@getBookInfo');
 });
