@@ -31,9 +31,24 @@ class BookController extends BaseController
      */
     public function getBookInfo()
     {
+
     	$id = $this->request->input('book_id');
 
-    	return $userInfo = $this->BookInfoService()->getBookInfoById($id);
+    	return $userInfo = $this->BookInfoService()->searchBookByIsbn($id);
+
+    	//return $userInfo = $this->BookInfoService()->getBookInfoById($id);
+    }
+
+    /**
+     * 获取书籍信息
+     */
+    public function getBookInfoByIsbn()
+    {
+    	$page = $this->request->input('page', 1);
+        $limit = $this->request->input('limit', 10);
+    	$isbn = $this->request->input('isbn');
+
+    	return $userInfo = $this->BookInfoService()->searchBookByIsbn($page,$limit,$isbn);
     }
 
     

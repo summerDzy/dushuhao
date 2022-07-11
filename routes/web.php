@@ -25,4 +25,6 @@ Route::group(['prefix' => 'api'], function ($router) {
 	Route::get('/book/list', 'BookController@getBookList');
 
 	Route::get('/book/info', 'BookController@getBookInfo');
+
+	Route::get('/book/search/isbn', 'BookController@getBookInfoByIsbn');
 });

@@ -25,7 +25,20 @@ class BookInfoModel extends BaseModel
         if ($bookId) $where[] = ['id', $bookId];
         $skip = ($page - 1) * $limit;
         $data['count'] = $this->getDb()->where($where)->count();
-        $data['list'] = $this->getDb()->select('*')->where($where)->skip($skip)->take($limit)->orderByDesc('id')->get()->toArray();
+        $data['list'] = $this->getDb()->select('*')->where($where)->skip($skip)->take($limit)->get()->toArray();
+        return $data;
+    }
+
+    /**
+     * 查询图书列表
+     */
+    public function getBookListByIsbn($page,$limit,$isbn)
+    {
+    	$where = [];
+        if ($isbn) $where[] = ['book_isbn', $isbn];
+        $skip = ($page - 1) * $limit;
+        $data['count'] = $this->getDb()->where($where)->count();
+        $data['list'] = $this->getDb()->select('*')->where($where)->skip($skip)->take($limit)->get()->toArray();
         return $data;
     }
 
@@ -40,5 +53,23 @@ class BookInfoModel extends BaseModel
         return $result ? $result->toArray() : $result;
     }
 
+    /**
+     * 根据书籍isbn查询书籍
+     */
+    public function getBookInfoByIsbn($isbn)
+    {
+        $where[] = ['book_isbn', '=', $isbn];
+        $result =  $this->getDb()->where($where)->first();
+
+        return $result ? $result->toArray() : $result;
+    }
+
+    /**
+     * 添加书籍
+     */
+    public function addBookInfo($data)
+    {
+        return $this->getDb()->insertGetId($data);
+    }
 
 }
