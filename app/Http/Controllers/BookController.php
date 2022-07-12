@@ -35,8 +35,6 @@ class BookController extends BaseController
     	$id = $this->request->input('book_id');
 
     	return $userInfo = $this->BookInfoService()->searchBookByIsbn($id);
-
-    	//return $userInfo = $this->BookInfoService()->getBookInfoById($id);
     }
 
     /**
@@ -45,9 +43,7 @@ class BookController extends BaseController
     public function getBookInfoByIsbn()
     {
 
-
     	$isbn = $this->request->input('isbn');
-
     	return $userInfo = $this->BookInfoService()->searchBookByIsbn($isbn);
     }
 
