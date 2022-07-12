@@ -44,11 +44,10 @@ class BookController extends BaseController
      */
     public function getBookInfoByIsbn()
     {
-    	$page = $this->request->input('page', 1);
-        $limit = $this->request->input('limit', 10);
+
     	$isbn = $this->request->input('isbn');
 
-    	return $userInfo = $this->BookInfoService()->searchBookByIsbn($page,$limit,$isbn);
+    	return $userInfo = $this->BookInfoService()->searchBookByIsbn($isbn);
     }
 
     

@@ -22,9 +22,9 @@ class BookInfoService extends BaseService
     }
 
 
-    public function searchBookByIsbn($page,$limit,$isbn)
+    public function searchBookByIsbn($isbn)
     {
-    	$book = $this->bookInfoModel()->getBookListByIsbn($page,$limit,$isbn);
+    	$book = $this->bookInfoModel()->getBookListByIsbn($isbn);
     	if(empty($book)){
     		$url  =  'https://route.showapi.com/1626-1';
 	        $data = [
@@ -38,20 +38,17 @@ class BookInfoService extends BaseService
 	        if($resultInfo['showapi_res_code']==0 && $resultInfo['showapi_res_body']['remark']=='success'){
 	        	$bookData = $resultInfo['showapi_res_body']['data'];
 
-	        	$book_data['book_name'] = $bookData['title'];
-	        	$book_data['book_author'] = $bookData['author'];
-	        	$book_data['book_cover'] = $bookData['img'];
-	        	$book_data['book_isbn'] = $bookData['isbn'];
-	        	$book_data['book_price'] = $bookData['price'];
-	        	$book_data['publish_time'] = $bookData['pubdate'];
-	        	$book_data['book_publish'] = $bookData['publisher'];
-	        	$book_data['book_intro'] = $bookData['gist'];
-	        	$book_data['book_pages'] = $bookData['page'];
+	        	$book['book_name'] = $bookData['title'];
+	        	$book['book_author'] = $bookData['author'];
+	        	$book['book_cover'] = $bookData['img'];
+	        	$book['book_isbn'] = $bookData['isbn'];
+	        	$book['book_price'] = $bookData['price'];
+	        	$book['publish_time'] = $bookData['pubdate'];
+	        	$book['book_publish'] = $bookData['publisher'];
+	        	$book['book_intro'] = $bookData['gist'];
+	        	$book['book_pages'] = $bookData['page'];
 
-	        	$bookId = $this->bookInfoModel()->addBookInfo($book_data);
-
-	        	$book = $this->bookInfoModel()->getBookList($page,$limit,$bookId);
-
+	        	$book['id'] = $this->bookInfoModel()->addBookInfo($book);
 	        }
     	}
 	    	

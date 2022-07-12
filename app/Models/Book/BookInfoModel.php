@@ -32,14 +32,13 @@ class BookInfoModel extends BaseModel
     /**
      * 查询图书列表
      */
-    public function getBookListByIsbn($page,$limit,$isbn)
+    public function getBookListByIsbn($isbn)
     {
     	$where = [];
         if ($isbn) $where[] = ['book_isbn', $isbn];
-        $skip = ($page - 1) * $limit;
-        $data['count'] = $this->getDb()->where($where)->count();
-        $data['list'] = $this->getDb()->select('*')->where($where)->skip($skip)->take($limit)->get()->toArray();
-        return $data;
+        $result =  $this->getDb()->where($where)->first();
+
+        return $result ? $result->toArray() : $result;
     }
 
     /**
