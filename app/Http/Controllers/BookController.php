@@ -23,7 +23,9 @@ class BookController extends BaseController
         $limit = $this->request->input('limit', 10);
         $bookId = $this->request->input('book_id');
 
-    	return $userInfo = $this->BookInfoService()->getBookList($page,$limit,$bookId);
+    	$bookList = $this->BookInfoService()->getBookList($page,$limit,$bookId);
+
+    	$this->success($bookList);
     }
 
     /**
@@ -34,7 +36,8 @@ class BookController extends BaseController
 
     	$id = $this->request->input('book_id');
 
-    	return $userInfo = $this->BookInfoService()->getBookInfoById($id);
+    	$bookInfo = $this->BookInfoService()->getBookInfoById($id);
+    	$this->success($bookInfo);
     }
 
     /**
@@ -42,9 +45,9 @@ class BookController extends BaseController
      */
     public function getBookInfoByIsbn()
     {
-
     	$isbn = $this->request->input('isbn');
-    	return $userInfo = $this->BookInfoService()->searchBookByIsbn($isbn);
+    	$bookInfo = $this->BookInfoService()->searchBookByIsbn($isbn);
+    	$this->success($bookInfo);
     }
 
     
