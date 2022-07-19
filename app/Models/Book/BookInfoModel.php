@@ -25,7 +25,7 @@ class BookInfoModel extends BaseModel
         if ($bookId) $where[] = ['id', $bookId];
         $skip = ($page - 1) * $limit;
         $data['count'] = $this->getDb()->where($where)->count();
-        $data['list'] = $this->getDb()->select('*')->where($where)->skip($skip)->take($limit)->get()->toArray();
+        $data['list'] = $this->getDb()->select('*')->where($where)->skip($skip)->take($limit)->orderByDesc('id')->get()->toArray();
         return $data;
     }
 
