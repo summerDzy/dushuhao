@@ -16,6 +16,19 @@ class UserInfoService extends BaseService
     	return $this->userInfoModel()->getUserInfoById($id);
     }
 
+    public function getUserInfoByOpenid($openid)
+    {
+    	return $this->userInfoModel()->getUserInfoByOpenid($openid);
+    }
+
+    public function addUserInfo(array $data)
+    {
+    	if (!isset($data['created_at'])) {
+            $data['created_at'] = date('Y-m-d H:i:s');
+        }
+        
+    	return $this->userInfoModel()->addUserInfo($data);
+    }
 
 }
 

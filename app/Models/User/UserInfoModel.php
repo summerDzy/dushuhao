@@ -17,7 +17,7 @@ class UserInfoModel extends BaseModel
     }
 
     /**
-     * 根据书籍id查询书籍标签
+     * 根据用户id查询用户信息
      */
     public function getUserInfoById($userId)
     {
@@ -27,5 +27,26 @@ class UserInfoModel extends BaseModel
         return $result ? $result->toArray() : $result;
     }
 
+    /**
+     * 根据用户openid查询用户信息
+     */
+    public function getUserInfoByOpenid($openid)
+    {
+        $where[] = ['openid', '=', $openid];
+        $result =  $this->getDb()->where($where)->first();
 
+        return $result ? $result->toArray() : $result;
+    }
+
+    /**
+     * 添加用户信息
+     */
+    public function addUserInfo(array $data)
+    {
+        if (!isset($data['created_at'])) {
+            $data['created_at'] = date('Y-m-d H:i:s');
+        }
+
+        return $this->getDb()->insertGetId($data);  
+    }
 }

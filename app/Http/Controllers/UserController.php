@@ -15,7 +15,7 @@ class UserController extends BaseController
     }
 
     /**
-     * 获取授权书籍列表
+     * 获取授权用户信息
      */
     public function getUserInfo()
     {
@@ -24,7 +24,32 @@ class UserController extends BaseController
     	return $userInfo = $this->UserInfoService()->getUserInfoById($id);
     }
 
-    
+    /**
+     * 获取授权用户信息
+     */
+    public function getUserInfoByOpenid()
+    {
+        $openid = $this->request->header('X-WX-OPENID');
+        print_r($openid);
+        return $userInfo = $this->UserInfoService()->getUserInfoByOpenid($openid);
+    }
+
+    /**
+     *  添加用户信息
+     *  avatarUrl: ""
+     *  city: ""
+     *  country: ""
+     *  gender: 0
+     *  language: "zh_CN"
+     *  nickName: "宗源"
+     *  province: ""
+     */
+    public function addUserInfo()
+    {
+        $data['openid'] = $this->request->header('X-WX-OPENID');
+
+        print_r($data);
+    }
 
 }
 
