@@ -21,7 +21,8 @@ class UserController extends BaseController
     {
     	$id = $this->request->input('id');
 
-    	return $userInfo = $this->UserInfoService()->getUserInfoById($id);
+    	$userInfo = $this->UserInfoService()->getUserInfoById($id);
+        $this->success($userInfo);
     }
 
     /**
@@ -29,10 +30,10 @@ class UserController extends BaseController
      */
     public function getUserInfoByOpenid()
     {
-        print_r($this->request->header());
         $openid = $this->request->header('X-WX-OPENID');
-        print_r($openid);die();
-        return $userInfo = $this->UserInfoService()->getUserInfoByOpenid($openid);
+
+        $userInfo = $this->UserInfoService()->getUserInfoByOpenid($openid);
+        $this->success($userInfo);
     }
 
     /**
@@ -48,8 +49,11 @@ class UserController extends BaseController
     public function addUserInfo()
     {
         $data['openid'] = $this->request->header('X-WX-OPENID');
+        $data['name'] = $this->request->input('nickName');
+        $data['avatar_url'] = $this->request->input('avatarUrl');
 
-        print_r($data);
+        $userInfo = $this->UserInfoService()->addUserInfo($data);
+        $this->success($userInfo);
     }
 
 }
