@@ -21,7 +21,6 @@ Route::group(['prefix' => 'api'], function ($router) {
 	Route::post('/count', 'CounterController@updateCount');
 
 	Route::get('/user/info', 'UserController@getUserInfo');
-
 	Route::get('/user/info2', 'UserController@getUserInfoByOpenid');
 
 	Route::get('/user/add', 'UserController@addUserInfo');

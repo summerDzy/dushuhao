@@ -29,8 +29,9 @@ class UserController extends BaseController
      */
     public function getUserInfoByOpenid()
     {
+        print_r($this->request->header());
         $openid = $this->request->header('X-WX-OPENID');
-        print_r($openid);
+        print_r($openid);die();
         return $userInfo = $this->UserInfoService()->getUserInfoByOpenid($openid);
     }
 
