@@ -52,6 +52,7 @@ class UserController extends BaseController
         $data['name'] = $this->request->input('nickName');
         $data['avatar_url'] = $this->request->input('avatarUrl');
 
+
         $userInfo = $this->UserInfoService()->addUserInfo($data);
         $this->success($userInfo);
     }
