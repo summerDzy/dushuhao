@@ -23,11 +23,19 @@ class UserInfoService extends BaseService
 
     public function addUserInfo(array $data)
     {
-    	if (!isset($data['created_at'])) {
-            $data['created_at'] = date('Y-m-d H:i:s');
-        }
-        
-    	return $this->userInfoModel()->addUserInfo($data);
+    	$userInfo = $this->userInfoModel()->getUserInfoByOpenid($data['openid']);
+    	if(empty($userInfo)){
+    		if (!isset($data['created_at'])) {
+	            $data['created_at'] = date('Y-m-d H:i:s');
+	        }
+
+	    	return $this->userInfoModel()->addUserInfo($data);
+    	}else{
+    		if (!isset($data['created_at'])) {
+	            unset($data['created_at']);
+	        }
+	    	return $this->userInfoModel()->updateUserInfo($userInfo['id'],$data);
+    	}
     }
 
 }

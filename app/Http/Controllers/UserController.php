@@ -51,6 +51,10 @@ class UserController extends BaseController
         $data['openid'] = $this->request->header('X-WX-OPENID');
         $data['name'] = $this->request->input('nickName');
         $data['avatar_url'] = $this->request->input('avatarUrl');
+        $data['country'] = $this->request->input('country');
+        $data['province'] = $this->request->input('province');
+        $data['city'] = $this->request->input('city');
+        $data['gender'] = $this->request->input('gender');
 
 
         $userInfo = $this->UserInfoService()->addUserInfo($data);

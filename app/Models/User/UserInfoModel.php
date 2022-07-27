@@ -49,4 +49,16 @@ class UserInfoModel extends BaseModel
 
         return $this->getDb()->insertGetId($data);  
     }
+
+    /**
+     * 更新用户信息
+     */
+    public function updateUserInfo($userId,array $data)
+    {
+        if (!isset($data['updated_at'])) {
+            $data['updated_at'] = date('Y-m-d H:i:s');
+        }
+
+        return $this->getDb()->where('id', $userId)->update($data);
+    }
 }
